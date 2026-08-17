@@ -1,6 +1,4 @@
 #include "Replace.hpp"
-#include <cstddef>
-#include <fstream>
 
 int	ftReplace(std::string filename, std::string s1, std::string s2)
 {
