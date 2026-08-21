@@ -1,7 +1,7 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = bits
-SRC = main.cpp Fixed.cpp
+NAME = ClapTrap
+SRC = main.cpp ClapTrap.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
