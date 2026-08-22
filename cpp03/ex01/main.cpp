@@ -1,4 +1,5 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 void section(const std::string &title)
 {
@@ -7,66 +8,69 @@ void section(const std::string &title)
 
 int main(void)
 {
-	section("Basic construction and destruction");
+	section("Construction chaining (named constructor)");
 	{
-		ClapTrap a("Alpha");
+		std::cout << ">>> about to construct a ScavTrap named Vulcan" << std::endl;
+		ScavTrap vulcan("Vulcan");
+		std::cout << ">>> ScavTrap Vulcan fully constructed" << std::endl;
+		// Expect to see ClapTrap's own creation message printed FIRST,
+		// then ScavTrap's creation message - proving the base is built before
+		// the derived constructor body runs.
 	}
-	std::cout << "(Alpha should be destroyed by now)" << std::endl;
+	std::cout << ">>> Vulcan should be destroyed by now (reverse order: ScavTrap first, then ClapTrap)" << std::endl;
 
-	section("Normal attack / takeDamage / beRepaired flow");
+	section("Default constructor");
 	{
-		ClapTrap bravo("Bravo");
-		bravo.attack("Dummy");
-		bravo.takeDamage(3);
-		bravo.beRepaired(2);
+		ScavTrap defaultTrap;
+		defaultTrap.attack("Nobody");
+	}
+
+	section("Stat overrides (100 hp / 50 energy / 20 dmg)");
+	{
+		ScavTrap sabre("Sabre");
+		sabre.attack("Target"); // should show 20 damage, not ClapTrap's 0
+	}
+
+	section("guardGate()");
+	{
+		ScavTrap tango("Tango");
+		tango.guardGate();
 	}
 
 	section("Copy constructor and copy assignment");
 	{
-		ClapTrap charlie("Charlie");
-		charlie.takeDamage(4);
-		ClapTrap charlieCopy(charlie);
-		charlieCopy.attack("Target");
+		ScavTrap uniform("Uniform");
+		uniform.attack("Target");
+		ScavTrap uniformCopy(uniform);
+		uniformCopy.attack("Target");
 
-		ClapTrap delta("Delta");
-		delta = charlie;
-		delta.attack("Target");
+		ScavTrap victor("Victor");
+		victor = uniform;
+		victor.attack("Target");
 	}
 
-	section("Death by takeDamage (exact hitPoints)");
+	section("Death and energy depletion still work via inherited logic");
 	{
-		ClapTrap echo("Echo");
-		echo.takeDamage(10); // exactly hitPoints -> should die
-		echo.attack("Nobody");    // should refuse: dead
-		echo.beRepaired(5);       // should refuse: dead
-		echo.takeDamage(1);       // should refuse: already dead
+		ScavTrap whiskey("Whiskey");
+		whiskey.takeDamage(150); // more than 100 hp -> should die, no underflow
+		whiskey.attack("Nobody");    // should refuse: dead
+		whiskey.guardGate();         // should refuse: dead
+
+		ScavTrap xray("Xray");
+		for (int i = 0; i < 50; i++)
+			xray.attack("Punching bag"); // 50 energy -> all should succeed
+		xray.attack("Punching bag");     // 51st: should refuse, no energy
+		xray.guardGate();                // should also refuse: no energy
 	}
 
-	section("Death by takeDamage (overkill)");
+	section("Polymorphism check: ClapTrap& referring to a ScavTrap");
 	{
-		ClapTrap foxtrot("Foxtrot");
-		foxtrot.takeDamage(9999); // way more than hitPoints -> should die, no underflow
-		foxtrot.attack("Nobody"); // should refuse: dead
-	}
-
-	section("Energy depletion (attack drains energy to 0)");
-	{
-		ClapTrap golf("Golf");
-		// energyPoints starts at 10, each attack costs 1
-		for (int i = 0; i < 10; i++)
-			golf.attack("Punching bag");
-		golf.attack("Punching bag"); // 11th attack: should refuse, no energy left
-		golf.beRepaired(1);          // should also refuse: no energy left
-	}
-
-	section("Energy depletion (beRepaired drains energy to 0)");
-	{
-		ClapTrap hotel("Hotel");
-		hotel.takeDamage(5); // so beRepaired has something to actually restore
-		for (int i = 0; i < 10; i++)
-			hotel.beRepaired(1);
-		hotel.beRepaired(1); // 11th repair: should refuse, no energy left
-		hotel.attack("Nobody"); // should also refuse: no energy left
+		ScavTrap yankee("Yankee");
+		ClapTrap &asBase = yankee;
+		asBase.attack("Target");
+		// Since ClapTrap::attack is NOT virtual (ex01 doesn't require virtual yet),
+		// this is expected to call ClapTrap's version, not ScavTrap's -
+		// worth checking whether that matches what you see, and why.
 	}
 
 	section("Done");

@@ -6,13 +6,14 @@
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string		name;
 		unsigned int	hitPoints;
 		unsigned int	energyPoints;
 		unsigned int	attackDamage;
 
 	public:
+		ClapTrap();
 		ClapTrap(const std::string& clapName);
 		ClapTrap(const ClapTrap& obj);
 		ClapTrap& operator=(const ClapTrap& obj);

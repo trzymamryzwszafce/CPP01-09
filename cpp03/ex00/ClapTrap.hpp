@@ -13,6 +13,7 @@ class ClapTrap
 		unsigned int	attackDamage;
 
 	public:
+		ClapTrap();
 		ClapTrap(const std::string& clapName);
 		ClapTrap(const ClapTrap& obj);
 		ClapTrap& operator=(const ClapTrap& obj);

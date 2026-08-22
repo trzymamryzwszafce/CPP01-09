@@ -1,5 +1,10 @@
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap() : name("default"), hitPoints(10), energyPoints(10), attackDamage(0)
+{
+	std::cout << "Default ClapTrap created" << std::endl;;
+}
+
 ClapTrap::ClapTrap(const std::string& clapName) : name(clapName), hitPoints(10), energyPoints(10), attackDamage(0)
 {
 	std::cout << "ClapTrap " << this->name << " created" << std::endl;
@@ -40,7 +45,7 @@ void ClapTrap::attack(const std::string& target)
 		if (this->hitPoints == 0)
 			std::cout << "ClapTrap " << this->name << " can't attack cause it's dead ☠️" << std::endl;
 		else
-			std::cout << "ClapTrap " << this->name << " have no energy" << std::endl;
+			std::cout << "ClapTrap " << this->name << " have no energy to attack" << std::endl;
 	}
 }
 
