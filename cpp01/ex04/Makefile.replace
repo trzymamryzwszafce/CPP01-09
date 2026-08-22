@@ -1,7 +1,7 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = Fixed
-SRC = test_main.cpp Fixed.cpp
+NAME = sed
+SRC = main.cpp Replace.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

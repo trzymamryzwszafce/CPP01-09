@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szmadeja <szmadeja@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/22 18:21:54 by szmadeja          #+#    #+#             */
+/*   Updated: 2026/08/22 18:36:12 by szmadeja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed() : value(0)
@@ -8,7 +20,7 @@ Fixed::Fixed() : value(0)
 Fixed::Fixed(const int num)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->value = num << this->bits;
+	this->value = num * (1 << this->bits);
 }
 
 Fixed::Fixed(const float num)
@@ -17,10 +29,9 @@ Fixed::Fixed(const float num)
 	this->value = roundf(num * (1 << this->bits));
 }
 
-Fixed::Fixed(const Fixed &obj)
+Fixed::Fixed(const Fixed &obj) : value(obj.value)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = obj;
 }
 
 Fixed &Fixed::operator=(const Fixed &obj)
@@ -54,7 +65,7 @@ float Fixed::toFloat() const
 
 int Fixed::toInt() const
 {
-	return this->value >> this->bits;
+	return this->value / (1 << this->bits);
 }
 
 Fixed& Fixed::min(Fixed& obj1, Fixed& obj2)
@@ -135,14 +146,14 @@ Fixed Fixed::operator-(const Fixed &obj) const
 Fixed Fixed::operator*(const Fixed &obj) const
 {
 	Fixed nobj;
-	nobj.setRawBits((this->value * obj.value) >> this->bits);
+	nobj.setRawBits(static_cast<long long>(this->value * obj.value) / (1 << this->bits));
 	return nobj;
 }
 
 Fixed Fixed::operator/(const Fixed &obj) const
 {
 	Fixed nobj;
-	nobj.setRawBits((this->value << this->bits) / obj.value);
+	nobj.setRawBits(static_cast<long long>(this->value * (1 << this->bits)) / obj.value);
 	return nobj;
 }
 

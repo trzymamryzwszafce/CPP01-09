@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szmadeja <szmadeja@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/22 18:21:07 by szmadeja          #+#    #+#             */
+/*   Updated: 2026/08/22 18:36:21 by szmadeja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
-#include <cmath>
-#include <ostream>
+
 
 Fixed::Fixed() : value(0)
 {
@@ -10,7 +21,7 @@ Fixed::Fixed() : value(0)
 Fixed::Fixed(const int num)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->value = num << this->bits;
+	this->value = num * (1 << this->bits);
 }
 
 Fixed::Fixed(const float num)
@@ -19,10 +30,9 @@ Fixed::Fixed(const float num)
 	this->value = roundf(num * (1 << this->bits));
 }
 
-Fixed::Fixed(const Fixed &obj)
+Fixed::Fixed(const Fixed &obj) : value(obj.value)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = obj;
 }
 
 Fixed &Fixed::operator=(const Fixed &obj)
@@ -56,7 +66,7 @@ float Fixed::toFloat() const
 
 int Fixed::toInt() const
 {
-	return this->value >> this->bits;
+	return this->value / (1 << this->bits);
 }
 
 std::ostream& operator<<(std::ostream& os, Fixed const &obj)
