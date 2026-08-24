@@ -13,8 +13,8 @@ class Animal
 		Animal();
 		Animal(const Animal& obj);
 		Animal& operator=(const Animal& obj);
-		~Animal;
+		~Animal();
 
 };
 
-#endif;
+#endif
