@@ -2,7 +2,7 @@
 
 ClapTrap::ClapTrap() : name("default"), hitPoints(10), energyPoints(10), attackDamage(0)
 {
-	std::cout << "Default ClapTrap created" << std::endl;
+	std::cout << "Default ClapTrap created" << std::endl;;
 }
 
 ClapTrap::ClapTrap(const std::string& clapName) : name(clapName), hitPoints(10), energyPoints(10), attackDamage(0)

@@ -19,13 +19,13 @@ ScavTrap::ScavTrap(const std::string& scavName) : ClapTrap(scavName)
 
 ScavTrap::ScavTrap(const ScavTrap &obj) : ClapTrap(obj)
 {
-	std::cout << "ScavTrap copy of "<< obj.name << " created" << std::endl;
+	std::cout << "Copy of "<< obj.name << " created" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &obj)
 {
 	if (this != &obj)
-	{	
+	{
 		std::cout << "ScavTrap " << this->name << " overwritten by " << obj.name << std::endl;
 		ClapTrap::operator=(obj);
 	}
