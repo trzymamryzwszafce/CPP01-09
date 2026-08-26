@@ -49,13 +49,5 @@ int	main()
 		cat.makeSound();
 		dog.makeSound();
 	}
-	std::cout << "\n--- SLICING ---\n\n";
-	{
-		Cat c;
-		Animal slicing = c;
-
-		std::cout << slicing.getType() << " " << std::endl;
-		slicing.makeSound();
-	}
 	return 0;
 }
