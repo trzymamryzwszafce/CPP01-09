@@ -1,38 +1,38 @@
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-Animal::Animal()
+WrongAnimal::WrongAnimal()
 {
 	this->type = "Kreatura";
 	std::cout << this->type << " created" << std::endl;
 }
 
-Animal::Animal(const Animal& obj) : type(obj.type)
+WrongAnimal::WrongAnimal(const WrongAnimal& obj) : type(obj.type)
 {
 	std::cout << "Animal copy of " << obj.type << " created" << std::endl;
 }
 
-Animal& Animal::operator=(const Animal& obj)
+WrongAnimal& WrongAnimal::operator=(const WrongAnimal& obj)
 {
 	if (this != &obj)
 	{
 		std::cout << "Animal " << this->type << " overwritten by " << obj.type << std::endl;
-		Animal::operator=(obj);
+		WrongAnimal::operator=(obj);
 	}
 	return *this;
 }
 
-Animal::~Animal()
+WrongAnimal::~WrongAnimal()
 {
-	std::cout << "Animal destructor type: " << this->type << " reduced to atoms" << std::endl;
+	std::cout << "Wrong Animal destructor type: " << this->type << " reduced to atoms" << std::endl;
 }
 
-std::string	Animal::getType() const
+std::string	WrongAnimal::getType() const
 {
 	std::string str = "This is " + this->type;
 	return (str);
 }
 
-void	Animal::makeSound() const
+void	WrongAnimal::makeSound() const
 {
 	std::cout << "Creature feature" << std::endl;
 }

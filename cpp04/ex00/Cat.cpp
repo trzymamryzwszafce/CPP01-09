@@ -8,25 +8,25 @@ Cat::Cat() : Animal()
 
 Cat::Cat(const Cat& obj) : Animal(obj)
 {
-	std::cout << "Copy of " << obj.type << " created" << std::endl;
+	std::cout << "Cat Copy of " << obj.type << " created" << std::endl;
 }
 
-Cat& Cat::operator=(const Cat& obj) : Animal(obj)
+Cat& Cat::operator=(const Cat& obj)
 {
 	if (this != &obj)
 	{
-		std::cout << this->name << " overwritten by " << obj.type << std::endl;
+		std::cout << "Cat " << this->type << " overwritten by " << obj.type << std::endl;
 		Animal::operator=(obj);
 	}
 	return *this;
 }
 
-Cat::~Cat();
+Cat::~Cat()
 {
 	std::cout << this->type << " reduced to atoms" << std::endl;
 }
 
-void	Cat::makeSound()
+void	Cat::makeSound() const
 {
 	std::cout << "MEEEEEEOOOOOOOOOOWWWWWWWWWWWWW" << std::endl;
 }
