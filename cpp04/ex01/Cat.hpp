@@ -15,6 +15,8 @@ class Cat : public Animal
 		virtual ~Cat();
 
 		void	makeSound() const;
+		void	setIdea(const std::string& idea);
+		void	getIdea();
 };
 
 #endif

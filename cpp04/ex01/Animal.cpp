@@ -16,7 +16,7 @@ Animal& Animal::operator=(const Animal& obj)
 	if (this != &obj)
 	{
 		std::cout << "Animal " << this->type << " overwritten by " << obj.type << std::endl;
-		Animal::operator=(obj);
+		this->type = obj.type;
 	}
 	return *this;
 }

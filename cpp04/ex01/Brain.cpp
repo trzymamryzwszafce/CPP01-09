@@ -27,3 +27,13 @@ Brain::~Brain()
 {
 	std::cout << "Brain reduced to atoms" << std::endl;
 }
+
+void	Brain::setIdea(const std::string& idea)
+{
+	this->ideas[0] = idea;
+}
+
+std::string	Brain::getIdea()
+{
+	return (this->ideas[0]);
+}
